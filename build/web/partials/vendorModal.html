@@ -1,0 +1,61 @@
+<div class="panel-body xsmall">
+    <form name="vendorForm">
+    <div>
+        <div class="col-xs-5 col-lg-6 text-right">Name:</div>
+        <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="vendor.name" name="vendorname" /></div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendorname.$pristine || vendorForm.vendorname.$invalid">
+            <span ng-show="vendorForm.vendorname.$error.required">Name is required</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Email:</div>
+        <div class="col-xs-7 col-lg-6 text-left"> 
+            <input name="vendoremail" type="email" size=10 required ng-model="vendor.email" />
+        </div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendoremail.$pristine || vendorForm.vendoremail.$invalid">
+            <span ng-show="vendorForm.vendoremail.$error.required">Email is required</span>
+            <span ng-show="vendorForm.vendoremail.$error.email">Enter a valid email please</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Phone:</div>
+        <div class="col-xs-7 col-lg-6 text-left"><input size=10 required type="text" ng-model="vendor.phone" name="vendorphone" /></div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendorphone.$pristine || vendorForm.vendorphone.$invalid">
+            <span ng-show="vendorForm.vendorphone.$error.required">Phone number is required</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Street:</div>
+        <div class="col-xs-7 col-lg-6 text-left"><input size=10 required type="text" ng-model="vendor.address1" name="vendoraddress" /></div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendoraddress.$pristine || vendorForm.vendoraddress.$invalid">
+            <span ng-show="vendorForm.vendoraddress.$error.required">Address is required</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">City:</div>
+        <div class="col-xs-7 col-lg-6 text-left"><input size=10 required type="text" ng-model="vendor.city" name="vendorcity" /></div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendorcity.$pristine || vendorForm.vendorcity.$invalid">
+            <span ng-show="vendorForm.vendorcity.$error.required">City is required</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Postal:</div>
+        <div class="col-xs-7 col-lg-6 text-left"><input size=10 required type="text" ng-pattern="/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/" ng-model="vendor.postalCode" name="vendorpostal" /></div>
+        <div class="cols-xs-11 custom-error" ng-show="vendorForm.vendorpostal.$pristine || vendorForm.vendorpostal.$invalid">
+            <span ng-show="vendorForm.vendorpostal.$error.required">Postal Code is required</span>
+            <span ng-show="vendorForm.vendorpostal.$error.pattern">Please enter a valid postal code</span>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Prov.:</div>
+        <div class="col-xs-7 col-lg-6 text-left"> 
+            <select ng-model="vendor.province" ng-init="vendor.province = 'Ontario'" class="input-small">
+                <option value="Ontario">Ontario</option>
+                <option value="Quebec">Quebec</option>
+                <option value="Alberta">Alberta</option>
+            </select>
+        </div>
+        <div class="col-xs-5 col-lg-6 text-right">Type:</div>
+        <div class="col-xs-7 col-lg-6 text-left"> 
+            <select ng-model="vendor.type" ng-init="vendor.type = 'Trusted'" class="input-small">
+                <option value="Trusted">Trusted</option>
+                <option value="Unknown">Unknown</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="(todo==='add') ? add() : update()" ng-disabled="vendorForm.$invalid">{{todo}}</button>
+            <button class="btn btn-danger" ng-if="todo==='update'" confirm-click ng-click="del()" >Delete</button>
+            
+        </div>
+    </div>
+    </form>
+</div>

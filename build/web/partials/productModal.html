@@ -1,0 +1,80 @@
+<div class="panel-body xsmall">
+    <form name="productForm">
+        <div class="panel">
+            <div class="panel panel-primary">
+                <div class="panel-heading xsmall">
+                    Product Information
+                    <button class="btn-primary pull-right" ng-click="isCollapsed = !isCollapsed;">
+                        <span ng-show="isCollapsed" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="!isCollapsed" class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </div>
+                <div class="panel-body xsmall" ng-class="{true: 'collapse'}[isCollapsed]">
+                    <div class="col-xs-5 col-lg-6 text-right">Vendor:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><select  required ng-model="product.vendorno" name="vendorno" ng-options="v.vendorno as v.vendorno for v in vendors"></select></div>
+                    <div class="col-xs-5 col-lg-6 text-right">Product Code:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-disabled="todo === 'update'"  ng-model="product.productcode" name="productcode" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.productcode.$pristine || productForm.productcode.$invalid">
+                        <span ng-show="productForm.productcode.$error.required">Product Code is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">Vendor SKU:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.vendorsku" name="vendorsku" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.vendorsku.$pristine || productForm.vendorsku.$invalid">
+                        <span ng-show="productForm.vendorsku.$error.required">Vendor Sku is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">Name:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.productname" name="productname" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.productname.$pristine || productForm.productname.$invalid">
+                        <span ng-show="productForm.productname.$error.required">Product Name is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">Cost:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.costprice" name="costprice" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.costprice.$pristine || productForm.costprice.$invalid">
+                        <span ng-show="productForm.costprice.$error.required">Cost is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">MSRP:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.msrp" name="msrp" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.msrp.$pristine || productForm.msrp.$invalid">
+                        <span ng-show="productForm.msrp.$error.required">MSRP is required</span>
+                    </div>
+                </div>
+                <div class="panel-heading xsmall">
+                    Inventory Information
+                    <button class="btn-primary pull-right" ng-click="isCollapsed = !isCollapsed;">
+                        <span ng-show="!isCollapsed" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="isCollapsed" class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </div>
+                <div class="panel-body xsmall" ng-class="{true: 'collapse'}[!isCollapsed]">
+                    <div class="col-xs-5 col-lg-6 text-right">ROP:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.rop" name="rop" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.rop.$pristine || productForm.rop.$invalid">
+                        <span ng-show="productForm.rop.$error.required">ROP is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">EOQ:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.eoq" name="eoq" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.eoq.$pristine || productForm.eoq.$invalid">
+                        <span ng-show="productForm.eoq.$error.required">EOQ is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">QOH:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.qoh" name="qoh" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.qoh.$pristine || productForm.qoh.$invalid">
+                        <span ng-show="productForm.qoh.$error.required">QOH is required</span>
+                    </div>
+                    <div class="col-xs-5 col-lg-6 text-right">QOO:</div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.qoo" name="qoo" /></div>
+                    <div class="cols-xs-11 custom-error" ng-show="productForm.qoo.$pristine || productForm.qoo.$invalid">
+                        <span ng-show="productForm.qoo.$error.required">QOO is required</span>
+                    </div>
+                </div>
+            </div>
+        </div>               
+    <div>    
+        <div>
+            <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="(todo==='add') ? add() : update()" ng-disabled="productForm.$invalid">{{todo}}</button>
+            <button class="btn btn-danger" ng-if="todo==='update'" confirm-click ng-click="del()" >Delete</button>
+        </div>
+    </div>
+    </form>
+</div>

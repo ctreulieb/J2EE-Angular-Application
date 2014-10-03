@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="case1">
+    <head>
+        <title>Sample Case 1</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/casecss.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse " role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ABC Procurement</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+                <ul class="nav navbar-nav">
+                    <li ng-click="navCollapsed = !navCollapsed" ng-class="{active: isActive('/') }"><a href="#/">Home</a></li>
+                    <li ng-click="navCollapsed = !navCollapsed" ng-class="{active: isActive('/vendor') }"><a href="#/vendor">Vendors</a></li>
+                    <li ng-click="navCollapsed = !navCollapsed" ng-class="{active: isActive('/product') }"><a href="#/product">Products</a></li>
+                    <li ng-click="navCollapsed = !navCollapsed" ng-class="{active: isActive('/generator') }"><a href="#/generator">PO Generator</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+
+        </nav>
+
+        <div class="content" ng-view> <!--partial views loaded here -->
+        </div>
+
+        <!-- Vendor Code  -->        
+        <script src="scripts/vendorlibs/angular.min.js" type="text/javascript"></script>
+        <script src="scripts/vendorlibs/ui-bootstrap-tpls-0.10.0.min.js" type="text/javascript"></script>
+        <script src="scripts/vendorlibs/angular-route.min.js" type="text/javascript"></script>
+
+        <!-- App Code  -->
+        <script src="scripts/app/app.js" type="text/javascript"></script>
+        <script src="scripts/app/VendorCtrl.js" type="text/javascript"></script>
+        <script src="scripts/app/VendorModalCtrl.js" type="text/javascript"></script>
+        <script src="scripts/app/ProductCtrl.js" type="text/javascript"></script>
+        <script src="scripts/app/ProductModalCtrl.js" type="text/javascript"></script>
+        <script src="scripts/app/GeneratorCtrl.js" type="text/javascript"></script>
+        <script src="scripts/app/directives.js" type="text/javascript"></script>
+        <script src="scripts/app/RESTFactory.js" type="text/javascript"></script>
+        <script src="scripts/app/routes.js" type="text/javascript"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<div  id="main-content">
+    <table class="table table-striped table-hover" style="width:100%">
+        <thead>
+        <th>Vendor No</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Type</th>
+        </thead>
+        <tr ng-click="selectRow(-1, null)">
+            <td colspan="4">..Click to add, else click desired vendor</td>
+        </tr>
+        <tbody>
+            <tr  ng:repeat="vendor in vendors" ng-click="selectRow($index, vendor)" id="ven{{vendor.vendorno}}">
+                <td align="left" style="pa: 15px;">{{vendor.vendorno}}</td>
+                <td align="left">{{vendor.name}}</td>
+                <td align="left">{{vendor.city}}</td>
+                <td align="left">{{vendor.type}}</td>
+            </tr>
+        </tbody>
+        <tr id="venEnd"><td colspan="4">{{status}}</td></tr>
+    </table>
+</div>
