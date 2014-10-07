@@ -12,9 +12,11 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import dtos.PurchaseOrderDTO;
 import dtos.PurchaseOrderLineItemDTO;
+import dtos.VendorDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.annotation.Resource;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import models.PurchaseOrderModel;
+import models.VendorModel;
 
 
 /**
@@ -49,23 +52,27 @@ public class PurchaseOrderPDF extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            buildpdf(response);
+            buildpdf(response, Integer.parseInt(request.getParameter("po")));
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
         }    
     }
-    private void buildpdf(HttpServletResponse response) {
+    private void buildpdf(HttpServletResponse response, int pono) {
         Font catFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
         Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
         Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
         String IMG = getServletContext().getRealPath("/img/logo.png");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();
+        double total = 0;
+        DecimalFormat currency = new DecimalFormat("$###,###.##");
 
         try {
             PurchaseOrderModel pModel = new PurchaseOrderModel();
-            PurchaseOrderDTO pDto = pModel.getPurchaseInfoByPONumber(18, ds);
+            VendorModel vModel = new VendorModel();
+            PurchaseOrderDTO pDto = pModel.getPurchaseInfoByPONumber(pono, ds);
             ArrayList<PurchaseOrderLineItemDTO> plDTO = pDto.getItems();
+            VendorDTO vDto = vModel.getVendorById(pDto.getVendorno(), ds);
             PdfWriter.getInstance(document, baos);
             document.open();
             Paragraph preface = new Paragraph();
@@ -79,9 +86,25 @@ public class PurchaseOrderPDF extends HttpServlet {
             preface.add(mainHead);
             preface.add(new Paragraph(String.format("%82s","PO#: " + pDto.getPonumber()), subFont));
             addEmptyLine(preface, 5);
-            // 3 column table
+            //vendorinfo
+            PdfPTable vTable = new PdfPTable(2);
+            vTable.setWidthPercentage(35);
+            vTable.setWidths(new int[]{15, 30});
+            vTable.setHorizontalAlignment(Element.ALIGN_LEFT);
+            PdfPCell cell = new PdfPCell(new Paragraph("Vendor:", smallBold));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBorder(0);
+            vTable.addCell(cell);
+            cell = new PdfPCell(new Paragraph(vDto.getName() + "\n" + vDto.getAddress1() +  "\n" + vDto.getCity() + "\n" + vDto.getProvince() +  "\n" + vDto.getPostalCode() + "\n   "));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setBorder(0);
+            vTable.addCell(cell);
+            preface.add(vTable);
+            addEmptyLine(preface, 1);
+            // 5 column table
             PdfPTable table = new PdfPTable(5);
-            PdfPCell cell = new PdfPCell(new Paragraph("Product Code", smallBold));
+            cell = new PdfPCell(new Paragraph("Product Code", smallBold));
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(cell);
             cell = new PdfPCell(new Paragraph("Product Description", smallBold));
@@ -106,24 +129,43 @@ public class PurchaseOrderPDF extends HttpServlet {
                 cell = new PdfPCell(new Phrase(Integer.toString(i.getQty())));
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
-                cell = new PdfPCell(new Phrase("$" + i.getMsrp()));
+                cell = new PdfPCell(new Phrase(currency.format(i.getMsrp())));
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
-                cell = new PdfPCell(new Phrase("$" + (i.getMsrp() * i.getQty())));
-                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-                table.addCell(cell);           
+                cell = new PdfPCell(new Phrase(currency.format(i.getMsrp() * i.getQty())));
+                cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                table.addCell(cell);
+                total += (i.getMsrp() * i.getQty());
             }
-            cell = new PdfPCell(new Phrase("Total:"));
-            cell.setColspan(2);
+            cell = new PdfPCell(new Phrase("Sub-Total:"));
+            cell.setColspan(4);
             cell.setBorder(0);
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             table.addCell(cell);
-            cell = new PdfPCell(new Phrase("$9,999.99"));
+            cell = new PdfPCell(new Phrase(currency.format(total)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);            
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase("Tax:"));
+            cell.setColspan(4);
+            cell.setBorder(0);
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(currency.format(total * 0.13)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);            
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase("Total:"));
+            cell.setColspan(4);
+            cell.setBorder(0);
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(currency.format(total * 1.13)));
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             cell.setBackgroundColor(BaseColor.YELLOW);            
             table.addCell(cell);
             preface.add(table);
-            addEmptyLine(preface, 3);
+            addEmptyLine(preface, 5);
             preface.setAlignment(Element.ALIGN_CENTER);
             preface.add(new Paragraph(String.format("%60s", new Date()), subFont));
             document.add(preface);
