@@ -65,7 +65,7 @@ public class PurchaseOrderPDF extends HttpServlet {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();
         double total = 0;
-        DecimalFormat currency = new DecimalFormat("$###,###.##");
+        DecimalFormat currency = new DecimalFormat("$###,###.00");
 
         try {
             PurchaseOrderModel pModel = new PurchaseOrderModel();
@@ -130,7 +130,7 @@ public class PurchaseOrderPDF extends HttpServlet {
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
                 cell = new PdfPCell(new Phrase(currency.format(i.getMsrp())));
-                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 table.addCell(cell);
                 cell = new PdfPCell(new Phrase(currency.format(i.getMsrp() * i.getQty())));
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
