@@ -1,5 +1,5 @@
 (function (app) {
-    var GeneratorCtrl = function($scope, $modal, RESTFactory, $filters) {
+    var GeneratorCtrl = function($scope, RESTFactory, $window) {
         var baseurl = 'webresources/generator';
         var init = function() {
         RESTFactory.restCall('get', 'webresources/vendor', -1, '').then(function(vendors) {
@@ -8,6 +8,8 @@
                 $scope.vendors = vendors;
                 $scope.status = 'Vendors Retrieved';
                 $scope.vendor = $scope.vendors[0];
+                $scope.notcreated = true;
+                $scope.subtotal = -1;
             }
             else {
                 $scope.status = 'Vendors not retrieved code = ' + vendors;
@@ -21,10 +23,11 @@
     
     $scope.selectVendor = function() {
         $scope.pickedVendor = true;
-        $scope.subtotal = 0;
+        $scope.subtotal = -1;
         $scope.tax = 0;
         $scope.total = 0;
         $scope.notcreated = true;
+        $scope.pono = null;
         var v;
         $scope.vendors.forEach(function(v)
         {
@@ -74,6 +77,10 @@
         
     }; //add to po
     
+    $scope.viewPdf = function() {
+        $window.location.href = 'POPDF?po=' + $scope.pono;
+    }; // viewPdf
+    
     $scope.createPO = function() {
         $scope.status = "Wait...";
         var PODTO = new Object();
@@ -85,7 +92,8 @@
                                 $scope.vendor.vendorno,
                                 PODTO).then(function(results){
             if (results.length > 0) {
-                $scope.status = results;
+                $scope.status = 'PO ' + results + ' created!';
+                $scope.pono = results;
                 $scope.notcreated = false;
                 $scope.generatorForm.$setPristine();
             }
@@ -97,5 +105,5 @@
         });
     };//create po
 };
-app.controller('GeneratorCtrl', ['$scope', '$modal', 'RESTFactory', GeneratorCtrl]);
+app.controller('GeneratorCtrl', ['$scope', 'RESTFactory', '$window', GeneratorCtrl]);
 })(angular.module('case1'));

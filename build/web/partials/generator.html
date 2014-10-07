@@ -61,7 +61,10 @@
         </div>               
     <div>    
         <div>
-            <button class="btn btn-primary" ng-show="notcreated" ng-click="createPO()" >Create PO</button>
+            <button class="btn btn-primary" ng-disabled="subtotal < 1" ng-show="notcreated" ng-click="createPO()" >Create PO</button>
+            <button class="btn btn-primary" ng-show="!notcreated" ng-click="viewPdf()" >PDF</button>
+        </div>
+        <div>
             {{status}}
         </div>
     </div>

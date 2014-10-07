@@ -50,7 +50,7 @@ public class PurchaseOrderModel {
                 }                
             }
             con.commit();
-            msg = "PO " + poNum + " Added!";
+            msg = Integer.toString(poNum);
             con.close();
         }catch (SQLException se) {
             //Handle errors for JDBC
