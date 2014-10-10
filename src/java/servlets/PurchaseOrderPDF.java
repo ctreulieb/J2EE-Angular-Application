@@ -51,6 +51,7 @@ public class PurchaseOrderPDF extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         try {
             buildpdf(response, Integer.parseInt(request.getParameter("po")));
         } catch (Exception e) {
@@ -58,6 +59,8 @@ public class PurchaseOrderPDF extends HttpServlet {
         }    
     }
     private void buildpdf(HttpServletResponse response, int pono) {
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        response.setHeader("Content-Disposition", "inline; filename=\"PurchaseOrder"+pono+".pdf\"");
         Font catFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
         Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
         Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
