@@ -1,22 +1,29 @@
-<div  id="main-content">
-    <table class="table table-striped table-hover" style="width:100%">
-        <thead>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Vendor No</th>
-        <th>MSRP</th>
-        </thead>
-        <tr ng-click="selectRow(-1, null)">
-            <td colspan="4">..Click to add, else click desired vendor</td>
-        </tr>
-        <tbody>
-            <tr ng:repeat="product in products" ng-click="selectRow($index, product)" id="ven{{product.productcode}}">
-                <td align="left" style="pa: 15px;">{{product.productcode}}</td>
-                <td align="left">{{product.productname}}</td>
-                <td align="left">{{product.vendorno}}</td>
-                <td align="left">{{product.msrp}}</td>
-            </tr>
-        </tbody>
-        <tr id="venEnd"><td colspan="4">{{status}}</td></tr>
-    </table>
+<div class="panel-body x-small">
+    <div class="panel panel-primary">
+        <div class="panel-heading xsmall">
+            Products
+        </div>
+        <div  id="main-content">
+            <table class="table table-striped table-hover" style="width:100%">
+                <thead>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Vendor No</th>
+                <th>MSRP</th>
+                </thead>
+                <tr ng-click="selectRow(-1, null)">
+                    <td colspan="4">..Click to add, else click desired product</td>
+                </tr>
+                <tbody>
+                    <tr ng:repeat="product in products" ng-click="selectRow($index, product)" id="ven{{product.productcode}}">
+                        <td align="left" style="pa: 15px;">{{product.productcode}}</td>
+                        <td align="left">{{product.productname}}</td>
+                        <td align="left">{{product.vendorno}}</td>
+                        <td align="left">{{product.msrp}}</td>
+                    </tr>
+                </tbody>
+                <tr id="venEnd"><td colspan="4">{{status}}</td></tr>
+            </table>
+        </div>
+    </div>
 </div>
