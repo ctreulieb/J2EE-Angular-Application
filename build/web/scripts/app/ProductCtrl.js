@@ -52,7 +52,9 @@
                     $scope.status = 'Product ' + results.productcode + ' Added!';
                     $scope.selectedRow = $scope.products.length - 1;
                 }                    
-                else
+                else if(results.numOfRows === -9)
+                    $scope.status = 'Product not added! - Product code ' + results.productcode + ' already exists';
+                else    
                     $scope.status = 'Product not added!';
             }else if(results.operation === 'update')
             {

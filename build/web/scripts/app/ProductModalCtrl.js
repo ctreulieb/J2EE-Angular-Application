@@ -57,7 +57,9 @@ var ProductModalCtrl = function($scope, $modalInstance, RESTFactory) {
         for(var p = 0;  p < $scope.products.length; p++)
         {
             if($scope.products[p].productcode === $scope.product.productcode) {
-                retVal = 'Product not added! - Product code ' + $scope.product.productcode + ' already exists';
+                retVal.productcode = $scope.product.productcode;
+                retVal.numOfRows = -9;
+                retVal.operation = 'add';
                 $modalInstance.close(retVal);
                 return;
             }
