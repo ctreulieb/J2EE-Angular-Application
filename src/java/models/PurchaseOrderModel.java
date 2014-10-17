@@ -1,3 +1,7 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: PurchaseOrderModel.java
+// Purpose: Purchase Order Model for adding/updating/deleting/retrieving from database.
 package models;
 
 import dtos.PurchaseOrderLineItemDTO;
@@ -9,16 +13,19 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;import java.sql.ResultSet;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-/**
- *
- * @author Craig
- */
+
 public class PurchaseOrderModel {
     
     public PurchaseOrderModel(){}
     
+    /**
+     * purchaseOrderAdd - Adds purchaseOrder to database, including PurchaseOrderLineItem entries for each item in purchase order
+     * @param total - Total cost of the purchase order
+     * @param vendorno - VendorNo of Vendor making purchase
+     * @param items - ArrayList of items in the purchase order
+     * @param ds - Datasource
+     * @return - String containing the PO number on success, or an error message on failure
+     */
     public String purchaseOrderAdd(double total, int vendorno, ArrayList<PurchaseOrderLineItemDTO> items, DataSource ds) {
         PreparedStatement pstmt;
         Connection con = null;
@@ -77,7 +84,12 @@ public class PurchaseOrderModel {
         
         return msg;
     }
-    
+    /**
+     * getPurchaseInfoByPONumber - Fetches purchase order information for provided PONum, including purchaseOrderLineItem info
+     * @param ponum - Purchase order number
+     * @param ds - Datasource
+     * @return PurchaseOrderDTO containing all info about requested purchase order
+     */
     public PurchaseOrderDTO getPurchaseInfoByPONumber(int ponum, DataSource ds) {
         PurchaseOrderDTO purchaseOrder = new PurchaseOrderDTO();
         Connection con = null;

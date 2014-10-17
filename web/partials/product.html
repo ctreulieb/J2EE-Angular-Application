@@ -19,7 +19,7 @@
                         <td align="left" style="pa: 15px;">{{product.productcode}}</td>
                         <td align="left">{{product.productname}}</td>
                         <td align="left">{{product.vendorno}}</td>
-                        <td align="left">{{product.msrp}}</td>
+                        <td align="right">${{product.msrp | number:2}}</td>
                     </tr>
                 </tbody>
                 <tr id="venEnd"><td colspan="4">{{status}}</td></tr>

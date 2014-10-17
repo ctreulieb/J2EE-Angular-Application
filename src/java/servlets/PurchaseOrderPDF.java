@@ -64,7 +64,7 @@ public class PurchaseOrderPDF extends HttpServlet {
         Font catFont = new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD);
         Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
         Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-        String IMG = getServletContext().getRealPath("/img/logo.png");
+        String IMG = getServletContext().getRealPath("/img/logo.jpg");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();
         double total = 0;

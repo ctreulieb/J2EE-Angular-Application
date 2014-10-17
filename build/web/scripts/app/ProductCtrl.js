@@ -1,6 +1,13 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: ProductCtrl.js
+// Purpose: Controller for the Product page.
 (function (app) {
     var ProductCtrl = function($scope, $modal, RESTFactory, $filters) {
         var baseurl = 'webresources/product';
+        
+        //Init
+        //Initializes variables and gets products from the database
         var init = function() {
             $scope.status = 'Loading Products...';
             RESTFactory.restCall('get', baseurl, -1, '').then(function(products) {
@@ -17,6 +24,9 @@
             });
         };
         init();
+        //selectRow
+        //Sets todo and prepares variables to add or modify a product
+        //Then it opens the modal window to add or update/delete as appropriate
         $scope.selectRow = function(row, product) {
         if(row < 0 ) {
             $scope.todo = 'add';

@@ -1,6 +1,12 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: VendorCtrl.js
+// Purpose: Controller for the Vendor page.
 (function(app) {
 var VendorCtrl = function($scope, $modal, RESTFactory, $filter) {
     var baseurl = 'webresources/vendor';
+    //Init
+    //Initializes variables and gets vendors from database
     var init = function() {
         $scope.status = 'Loading Vendors...';
         RESTFactory.restCall('get', baseurl, -1, '').then(function(vendors) {
@@ -19,6 +25,9 @@ var VendorCtrl = function($scope, $modal, RESTFactory, $filter) {
         
     };
     init();
+    //selectRow
+    //Sets todo and prepares variables to add or modify a vendor
+    //Then it opens the modal window to add or update/delete as appropriate
     $scope.selectRow = function(row, vendor) {
         if(row < 0 ) {
             $scope.todo = 'add';

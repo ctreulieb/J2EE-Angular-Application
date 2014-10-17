@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: VendorResource.java
+// Purpose: Vendor Resource for calling add/update/delete/retrieve from the model.
 package resources;
 
 import dtos.VendorDTO;
@@ -24,11 +22,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import models.VendorModel;
 
-/**
- * REST Web Service
- *
- * @author Craig
- */
 @Path("vendor")
 public class VendorResource {
 
@@ -38,12 +31,14 @@ public class VendorResource {
     @Resource(lookup = "jdbc/Info5059db")
     DataSource ds;
 
-    /**
-     * Creates a new instance of VendorResource
-     */
     public VendorResource() {
     }
 
+    /**
+     * createVendorFromJson
+     * @param vendor - VendorDTO containing new vendor info
+     * @return Response from model
+     */
     @POST
     @Consumes("application/json")
     public Response createVendorFromJson(VendorDTO vendor) {
@@ -53,6 +48,10 @@ public class VendorResource {
         return Response.created(uri).entity(vendorNo).build();
     }
     
+    /**
+     * getVendorsJson
+     * @return all vendor info in Json Format
+     */
     @GET
     @Produces("application/json")
     public ArrayList<VendorDTO> getVendorsJson() {
@@ -60,6 +59,11 @@ public class VendorResource {
         return model.getVendors(ds);
     }
     
+    /**
+     * updateVendorFromJson
+     * @param vendor - VendorDTO containing updated vendor info
+     * @return response from model
+     */
     @PUT
     @Consumes("application/json")
     public Response updateVendorFromJson(VendorDTO vendor) {
@@ -69,6 +73,11 @@ public class VendorResource {
         return Response.created(uri).entity(numOfRowsUpdated).build();
     }
     
+    /**
+     * deleteVendorFromJson
+     * @param vendorno - Vendor to be deleted
+     * @return response from model
+     */
     @DELETE
     @Path("/{vendorno}")
     @Consumes("application/json")

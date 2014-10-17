@@ -13,19 +13,22 @@
                     <div class="col-xs-5 col-lg-6 text-right">Vendor:</div>
                     <div class="col-xs-7 col-lg-6 text-left"><select  required ng-model="product.vendorno" name="vendorno" ng-options="v.vendorno as v.vendorno for v in vendors"></select></div>
                     <div class="col-xs-5 col-lg-6 text-right">Product Code:</div>
-                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-disabled="todo === 'update'"  ng-model="product.productcode" name="productcode" /></div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-disabled="todo === 'update'" ng-maxlength="5" ng-model="product.productcode" name="productcode" /></div>
                     <div class="cols-xs-11 custom-error" ng-show="productForm.productcode.$pristine || productForm.productcode.$invalid">
                         <span ng-show="productForm.productcode.$error.required">Product Code is required</span>
+                        <span ng-show="productForm.productcode.$error.maxlength">Product Code max length is 5</span>
                     </div>
                     <div class="col-xs-5 col-lg-6 text-right">Vendor SKU:</div>
-                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.vendorsku" name="vendorsku" /></div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.vendorsku" ng-maxlength="10" name="vendorsku" /></div>
                     <div class="cols-xs-11 custom-error" ng-show="productForm.vendorsku.$pristine || productForm.vendorsku.$invalid">
                         <span ng-show="productForm.vendorsku.$error.required">Vendor Sku is required</span>
+                        <span ng-show="productForm.vendorsku.$error.maxlength">Vendor Sku max length is 10</span>
                     </div>
                     <div class="col-xs-5 col-lg-6 text-right">Name:</div>
-                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.productname" name="productname" /></div>
+                    <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-maxlength="20" ng-model="product.productname" name="productname" /></div>
                     <div class="cols-xs-11 custom-error" ng-show="productForm.productname.$pristine || productForm.productname.$invalid">
                         <span ng-show="productForm.productname.$error.required">Product Name is required</span>
+                        <span ng-show="productForm.productname.$error.maxlength">Product Name max length is 20</span>
                     </div>
                     <div class="col-xs-5 col-lg-6 text-right">Cost:</div>
                     <div class="col-xs-7 col-lg-6 text-left"><input  size=10 required type="text" ng-model="product.costprice" name="costprice" /></div>

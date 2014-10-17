@@ -1,7 +1,14 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: VendorModalCtrl.js
+// Purpose: Controller for the Vendor Modal window.
 (function(app) {
 var VendorModalCtrl = function($scope, $modalInstance, RESTFactory) {
     var baseurl = 'webresources/vendor';
     var retVal = {operation: '', vendorno: -1, numOfRows: -1};
+    
+    //Update
+    //Updates selected vendor
     $scope.update = function() {
         RESTFactory.restCall('put', baseurl, -1, $scope.vendor).then(function(results){
            retVal.operation = 'update';
@@ -22,7 +29,8 @@ var VendorModalCtrl = function($scope, $modalInstance, RESTFactory) {
         });
         
     };//update
-    
+    //Add
+    //Adds a new vendor
     $scope.add = function() {
         $scope.status = "Wait...";
         RESTFactory.restCall('post', baseurl, -1, $scope.vendor).then(function(results) {
@@ -53,11 +61,14 @@ var VendorModalCtrl = function($scope, $modalInstance, RESTFactory) {
         });
     }; // add
     
+    //Cancel
+    //Closes modal window
     $scope.cancel = function() {
         $scope.status = "";
         $modalInstance.close(retVal);
     }; //cancel
-    
+    //Del
+    //Deletes selected vendor
     $scope.del = function() {
         RESTFactory.restCall('delete', baseurl, $scope.vendor.vendorno, '').then(function(results) {
             retVal.operation = 'delete';

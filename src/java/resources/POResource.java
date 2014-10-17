@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: POResource.java
+// Purpose: Purchase Order Resource for calling add/update/delete/retrieve from the model.
 package resources;
 
 import dtos.PurchaseOrderDTO;
@@ -29,7 +28,11 @@ public class POResource {
     public POResource() {
     }
     
-    
+    /**
+     * createPo - Creates Purchase order out of provided PurchaseOrderDTO
+     * @param po - PurchaseOrderDTO containing all info about Purchase Order to be added
+     * @return - Response Object from model
+     */
     @POST
     @Consumes("application/json")
     public Response createPO(PurchaseOrderDTO po) {

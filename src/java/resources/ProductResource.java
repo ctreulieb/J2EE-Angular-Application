@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: ProductResource.java
+// Purpose: Product Resource for calling add/update/delete/retrieve from the model.
 
 package resources;
 
@@ -36,7 +35,11 @@ public class ProductResource {
     public ProductResource() {
     }
     
-    
+    /**
+     * createProductFromJson
+     * @param product - ProductDTO containing new product information
+     * @return response object from the model
+     */
     @POST
     @Consumes("application/json")
     public Response createProductFromJson(ProductDTO product) {
@@ -46,6 +49,10 @@ public class ProductResource {
         return Response.created(uri).entity(numProductsAdded).build();
     }
     
+    /**
+     * getProductsJson
+     * @return all products in JSON format
+     */
     @GET
     @Produces("application/json")
     public ArrayList<ProductDTO> getProductsJson() {
@@ -53,6 +60,11 @@ public class ProductResource {
         return model.getProducts(ds);
     }
     
+    /**
+     * getVendorProductsJson
+     * @param vendorno - Vendor no of vendor who's product info you want
+     * @return all products for specified vendor in JSON format
+     */
     @GET
     @Path("/{vendorno}")
     @Produces("application/json")
@@ -61,6 +73,11 @@ public class ProductResource {
         return model.getAllProductsForVendor(vendorno, ds);
     }
     
+    /**
+     * updateProductFromJson
+     * @param product - ProductDTO containing product information to be updated
+     * @return Response from model
+     */
     @PUT
     @Consumes("application/json")
     public Response updateProductFromJson(ProductDTO product) {
@@ -70,6 +87,11 @@ public class ProductResource {
         return Response.created(uri).entity(numRowsUpdated).build();
     }
     
+    /**
+     * deleteProductFromJson
+     * @param productcode - product code to be deleted
+     * @return Response from model
+     */
     @DELETE
     @Path("/{productcode}")
     @Consumes("application/json")

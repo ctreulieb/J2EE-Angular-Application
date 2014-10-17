@@ -1,6 +1,12 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: GeneratorCtrl.js
+// Purpose: Controller for the Purchase order generator page.
 (function (app) {
     var GeneratorCtrl = function($scope, RESTFactory, $window) {
         var baseurl = 'webresources/generator';
+        //Init
+        //Initializes variables and gets the vendors from the database
         var init = function() {
         RESTFactory.restCall('get', 'webresources/vendor', -1, '').then(function(vendors) {
             
@@ -21,6 +27,8 @@
     };
     init();
     
+    //SelectVendor
+    //Selects a vendor and retrieves that vendors products from DB
     $scope.selectVendor = function() {
         $scope.pickedVendor = true;
         $scope.subtotal = -1;
@@ -51,6 +59,8 @@
         });
     };//select vendor
     
+    //addToPo
+    //Adds a product and quantity to the purchase order, extended price and taxes etc are calculated as well
     $scope.addToPO =  function() {
         $scope.subtotal = 0;
         $scope.tax = 0;
@@ -77,10 +87,14 @@
         
     }; //add to po
     
+    //viewPDF
+    //Links to the PDF servlet to view the Purchase order invoice for the just completed purchase order
     $scope.viewPdf = function() {
         $window.location.href = 'POPDF?po=' + $scope.pono;
     }; // viewPdf
     
+    //CreatePO
+    //Adds the current Purchase order to the database
     $scope.createPO = function() {
         $scope.status = "Wait...";
         var PODTO = new Object();

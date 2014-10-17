@@ -1,7 +1,14 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: ProductModalCtrl.js
+// Purpose: Controller for the Product modal window.
 (function(app) {
 var ProductModalCtrl = function($scope, $modalInstance, RESTFactory) {
     var baseurl = 'webresources/product';
     var retVal = {operation: '', productcode: -1, numOfRows: -1};
+    
+    //Init 
+    //Initializes variables and gets vendors from database
     var init = function() {
         RESTFactory.restCall('get', 'webresources/vendor', -1, '').then(function(vendors) {
             
@@ -20,6 +27,8 @@ var ProductModalCtrl = function($scope, $modalInstance, RESTFactory) {
     };
     init();
     
+    //Update
+    //Updates a product and closes the modal window
     $scope.update = function() {
         RESTFactory.restCall('put', baseurl, -1, $scope.product).then(function(results){
            retVal.operation = 'update';
@@ -41,8 +50,18 @@ var ProductModalCtrl = function($scope, $modalInstance, RESTFactory) {
         
     };//update
     
+    //Add
+    //Add's a product and closes the modal window
     $scope.add = function() {
         $scope.status = "Wait...";
+        for(var p = 0;  p < $scope.products.length; p++)
+        {
+            if($scope.products[p].productcode === $scope.product.productcode) {
+                retVal = 'Product not added! - Product code ' + $scope.product.productcode + ' already exists';
+                $modalInstance.close(retVal);
+                return;
+            }
+        }
         RESTFactory.restCall('post', baseurl, -1, $scope.product).then(function(results) {
             if(results.substring) {
                 if (parseInt(results) > 0){
@@ -70,11 +89,15 @@ var ProductModalCtrl = function($scope, $modalInstance, RESTFactory) {
         });
     }; // add
     
+    //Cancel
+    //Closes the modal window
     $scope.cancel = function() {
         $scope.status = "";
         $modalInstance.close(retVal);
     }; //cancel
     
+    //Del
+    //Deletes selected product and closes the modal window
     $scope.del = function() {
         RESTFactory.restCall('delete', baseurl, $scope.product.productcode, '').then(function(results) {
             retVal.operation = 'delete';

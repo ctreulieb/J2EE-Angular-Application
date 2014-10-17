@@ -1,3 +1,7 @@
+// Author: Craig Treulieb 0606138
+// Date: Oct 16 2014
+// File: PurchaseOrderDTO.java
+// Purpose: Purchase Order Data Transfer Object.
 package dtos;
 
 import java.io.Serializable;
