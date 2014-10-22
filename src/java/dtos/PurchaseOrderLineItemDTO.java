@@ -9,8 +9,16 @@ import java.io.Serializable;
 public class PurchaseOrderLineItemDTO implements Serializable {
     private int qty;
     private String Productcode;
-    private double msrp;
+    private double Costprice;
     private String Productname;
+
+    public double getCostprice() {
+        return Costprice;
+    }
+
+    public void setCostprice(double Costprice) {
+        this.Costprice = Costprice;
+    }
 
     public String getProductname() {
         return Productname;
@@ -36,12 +44,6 @@ public class PurchaseOrderLineItemDTO implements Serializable {
         this.Productcode = Productcode;
     }
 
-    public double getMsrp() {
-        return msrp;
-    }
-
-    public void setMsrp(double msrp) {
-        this.msrp = msrp;
-    }
+    
 
 }

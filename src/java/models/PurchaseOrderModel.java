@@ -52,7 +52,7 @@ public class PurchaseOrderModel {
                     pstmt.setInt(1,poNum);
                     pstmt.setString(2, item.getProductcode());
                     pstmt.setInt(3, item.getQty());
-                    pstmt.setBigDecimal(4, BigDecimal.valueOf(item.getMsrp()));
+                    pstmt.setBigDecimal(4, BigDecimal.valueOf(item.getCostprice()));
                     pstmt.execute();
                 }                
             }
@@ -116,7 +116,7 @@ public class PurchaseOrderModel {
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 PurchaseOrderLineItemDTO litem = new PurchaseOrderLineItemDTO();
-                litem.setMsrp(rs.getDouble("price"));
+                litem.setCostprice(rs.getDouble("price"));
                 litem.setProductcode(rs.getString("prodcd"));
                 litem.setProductname(rs.getString("productname"));
                 litem.setQty(rs.getInt("qty"));

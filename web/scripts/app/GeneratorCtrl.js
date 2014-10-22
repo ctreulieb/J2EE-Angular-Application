@@ -73,10 +73,10 @@
                    $scope.products[pCount].qty = $scope.products[pCount].eoq;
                else
                    $scope.products[pCount].qty = $scope.purchaseOrder.qty;
-               $scope.products[pCount].extended = $scope.products[pCount].qty * $scope.products[pCount].msrp;
+               $scope.products[pCount].extended = $scope.products[pCount].qty * $scope.products[pCount].costprice;
            }
            
-           $scope.subtotal += ($scope.products[pCount].qty * $scope.products[pCount].msrp);
+           $scope.subtotal += ($scope.products[pCount].qty * $scope.products[pCount].costprice);
 
         };
         

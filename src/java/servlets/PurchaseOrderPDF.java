@@ -132,13 +132,13 @@ public class PurchaseOrderPDF extends HttpServlet {
                 cell = new PdfPCell(new Phrase(Integer.toString(i.getQty())));
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
-                cell = new PdfPCell(new Phrase(currency.format(i.getMsrp())));
+                cell = new PdfPCell(new Phrase(currency.format(i.getCostprice())));
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 table.addCell(cell);
-                cell = new PdfPCell(new Phrase(currency.format(i.getMsrp() * i.getQty())));
+                cell = new PdfPCell(new Phrase(currency.format(i.getCostprice() * i.getQty())));
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 table.addCell(cell);
-                total += (i.getMsrp() * i.getQty());
+                total += (i.getCostprice() * i.getQty());
             }
             cell = new PdfPCell(new Phrase("Sub-Total:"));
             cell.setColspan(4);

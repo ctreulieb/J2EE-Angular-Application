@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/src/java/org/netbeans/rest/application/config/ApplicationConfig.java</file>
+            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/src/java/models/PurchaseOrderModel.java</file>
+            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/web/scripts/app/ProductCtrl.js</file>
             <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/src/java/servlets/PurchaseOrderPDF.java</file>
             <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/web/scripts/app/ProductModalCtrl.js</file>
-            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/web/partials/vendor.html</file>
-            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/web/partials/vendorModal.html</file>
+            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/src/java/dtos/PurchaseOrderLineItemDTO.java</file>
+            <file>file:/C:/Users/Craig/Documents/Term6-Fall2014/INFO5059%20-%20Java%20EE%20Client%20Server/Case1/web/scripts/app/GeneratorCtrl.js</file>
         </group>
     </open-files>
 </project-private>
